@@ -1,4 +1,4 @@
-﻿using AmbevConexao.Domain.Common;
+﻿using AmbevConexao.Domain.Common.Enums;
 using AmbevConexao.Domain.Professor;
 using MediatR;
 
@@ -9,13 +9,11 @@ public class AdicionarProfessorCommand : IRequest<AdicionarProfessorResponse>
 {
     public string Nome { get; set; }
     public string Email{ get; set; }
-    public TurnoEnum Turno { get; set; }
 
-    public AdicionarProfessorCommand(string nome, string email, TurnoEnum turno)
+    public AdicionarProfessorCommand(string nome, string email)
     {
         Nome = nome;
         Email = email;
-        Turno = turno;
     }
 }
 
@@ -35,7 +33,7 @@ public sealed class AdicionarProfessor : IRequestHandler<AdicionarProfessorComma
 
     public async Task<AdicionarProfessorResponse> Handle(AdicionarProfessorCommand request, CancellationToken cancellationToken)
     {
-        var alunoEntidade = ProfessorEntity.NovoProfessor(request.Nome, request.Email, request.Turno);
+        var alunoEntidade = ProfessorEntity.NovoProfessor(request.Nome, request.Email);
 
         _repository.Incluir(alunoEntidade);
 

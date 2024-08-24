@@ -5,13 +5,13 @@
 namespace AmbevConexao.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class TurmaAluno : Migration
+    public partial class Matricula : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TurmaAluno",
+                name: "Matricula",
                 columns: table => new
                 {
                     IdAluno = table.Column<int>(type: "int", nullable: false),
@@ -21,15 +21,15 @@ namespace AmbevConexao.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TurmaAluno", x => new { x.IdTurma, x.IdAluno });
+                    table.PrimaryKey("PK_Matricula", x => new { x.IdTurma, x.IdAluno });
                     table.ForeignKey(
-                        name: "FK_TurmaAluno_Aluno_IdAluno",
+                        name: "FK_Matricula_Aluno_IdAluno",
                         column: x => x.IdAluno,
                         principalTable: "Aluno",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TurmaAluno_Turma_IdTurma",
+                        name: "FK_Matricula_Turma_IdTurma",
                         column: x => x.IdTurma,
                         principalTable: "Turma",
                         principalColumn: "Id",
@@ -37,8 +37,8 @@ namespace AmbevConexao.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TurmaAluno_IdAluno",
-                table: "TurmaAluno",
+                name: "IX_Matricula_IdAluno",
+                table: "Matricula",
                 column: "IdAluno");
         }
 
@@ -46,7 +46,7 @@ namespace AmbevConexao.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TurmaAluno");
+                name: "Matricula");
         }
     }
 }

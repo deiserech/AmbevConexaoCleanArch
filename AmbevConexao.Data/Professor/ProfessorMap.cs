@@ -10,7 +10,8 @@ namespace AmbevConexao.Infraestructure.Professor
         {
             builder.ToTable("Professor");
 
-            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id)
+                .UseIdentityColumn();
 
             builder.Property(x => x.Nome)
                 .HasColumnType("varchar(150)")
@@ -20,15 +21,8 @@ namespace AmbevConexao.Infraestructure.Professor
                .HasColumnType("varchar(100)")
                .IsRequired();
 
-            builder.Property(x => x.Banco)
-               .HasColumnType("varchar(50)")
-               .IsRequired(false);
-
-            builder.Property(x => x.Agencia)
-               .HasColumnType("varchar(10)");
-
-            builder.Property(x => x.Conta)
-               .HasColumnType("varchar(20)");
+            builder.HasMany(Professor => Professor.Cursos)
+                .WithOne(curso => curso.Professor);
         }
     }
 }

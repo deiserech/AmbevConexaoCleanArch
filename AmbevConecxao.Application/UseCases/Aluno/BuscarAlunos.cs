@@ -2,8 +2,6 @@
 using MediatR;
 
 namespace AmbevConecxao.Application.UseCases.Aluno;
-
-
 public class BuscarAlunoCommand : IRequest<BuscarAlunoResponse>
 {
     public int Id { get; set; }

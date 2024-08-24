@@ -1,33 +1,35 @@
 ﻿using AmbevConexao.Domain.Common;
-using AmbevConexao.Domain.Turma;
+using AmbevConexao.Domain.Curso;
 
 namespace AmbevConexao.Domain.Professor
 {
     public class ProfessorEntity : IEntity
     {
         public int Id { get; set; }
+        public string? Nome { get; private set; }
+        public string? Email { get; private set; }
+        public List<CursoEntity> Cursos { get; set; } = new List<CursoEntity>();
 
-        public string Nome { get; private set; }
-        public string Email { get; private set; }
-        public TurnoEnum Turno { get; private set; }
-        public string? Banco { get; private set; }
-        public string? Agencia { get; private set; }
-        public string? Conta { get; private set; }
-        public List<TurmaEntity> Turmas { get; set; } = new List<TurmaEntity>();
-
-        public static ProfessorEntity NovoProfessor(string nome, string email, TurnoEnum turno)
+        public static ProfessorEntity NovoProfessor(string nome, string email)
         {
-            var prof = new ProfessorEntity();
-            prof.Nome = nome;
-            prof.Email = email;
-            prof.Turno = turno;
+            var professor = new ProfessorEntity
+            {
+                Nome = nome,
+                Email = email
+            };
 
-            return prof;
+            return professor;
         }
 
         public ProfessorEntity AlterarNome(string novoNome)
         {
             Nome = novoNome;
+            return this;
+        }
+
+        public ProfessorEntity AlterarEmail(string novoEmail)
+        {
+            Email = novoEmail;
             return this;
         }
     }

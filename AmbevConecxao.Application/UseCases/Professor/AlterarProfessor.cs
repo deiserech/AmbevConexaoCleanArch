@@ -8,11 +8,13 @@ public class AlterarProfessorCommand : IRequest<AlterarProfessorResponse>
 {
     public int Id { get; set; }
     public string Nome { get; set; }
+    public string Email { get; set; }
 
-    public AlterarProfessorCommand(int id, string nome)
+    public AlterarProfessorCommand(int id, string nome, string email)
     {
         Id = id;
         Nome = nome;
+        Email = email;
     }
 }
 
@@ -35,6 +37,7 @@ public sealed class AlterarProfessor : IRequestHandler<AlterarProfessorCommand, 
         var alunoEntidade = _repository.Selecionar(request.Id);
 
         alunoEntidade.AlterarNome(request.Nome);
+        alunoEntidade.AlterarEmail(request.Email);
 
         _repository.Alterar(alunoEntidade);
 

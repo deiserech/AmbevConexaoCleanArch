@@ -1,5 +1,4 @@
 ﻿using AmbevConecxao.Application.UseCases.Aluno;
-using AmbevConexao.API.Filters;
 using AmbevConexao.Domain.Aluno;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,8 +28,6 @@ namespace AmbevConexao.API.Controllers
         {
             var result = await _mediator.Send(new BuscarAlunoCommand(id));
 
-            if (result.Aluno == null) throw new NotFoundException("Aluno não existe"); 
-
             return result.Aluno;
         }
 
@@ -42,7 +39,7 @@ namespace AmbevConexao.API.Controllers
             return result.Alunos;
         }
 
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         public async Task<AlunoEntity> Put(int id, [FromBody] AlterarAlunoCommand alunoCommand)
         {
             var result = await _mediator.Send(alunoCommand);
@@ -53,7 +50,7 @@ namespace AmbevConexao.API.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            var result = await _mediator.Send(new ExcluirAlunoCommand(id));
+            var result = await _mediator.Send(new InativarAlunoCommand(id));
         }
     }
 }

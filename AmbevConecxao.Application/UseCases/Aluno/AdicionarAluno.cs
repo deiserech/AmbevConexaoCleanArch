@@ -7,10 +7,14 @@ namespace AmbevConecxao.Application.UseCases.Aluno;
 public class AdicionarAlunoCommand : IRequest<AdicionarAlunoResponse>
 {
     public string Nome { get; set; }
+    public string Endereco { get; set; }
+    public string Email { get; set; }
 
-    public AdicionarAlunoCommand(string nome)
+    public AdicionarAlunoCommand(string nome, string endereco, string email)
     {
         Nome = nome;
+        Endereco = endereco;
+        Email = email;
     }
 }
 
@@ -30,7 +34,7 @@ public sealed class AdicionarAluno : IRequestHandler<AdicionarAlunoCommand, Adic
 
     public async Task<AdicionarAlunoResponse> Handle(AdicionarAlunoCommand request, CancellationToken cancellationToken)
     {
-        var alunoEntidade = AlunoEntity.NovoAluno(request.Nome);
+        var alunoEntidade = AlunoEntity.NovoAluno(request.Nome, request.Endereco, request.Email);
 
         _repository.Incluir(alunoEntidade);
 

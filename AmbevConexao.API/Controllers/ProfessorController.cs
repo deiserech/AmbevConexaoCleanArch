@@ -1,5 +1,4 @@
 ﻿using AmbevConecxao.Application.UseCases.Professor;
-using AmbevConexao.API.Filters;
 using AmbevConexao.Domain.Professor;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,8 +28,6 @@ public class ProfessorController : ControllerBase
     {
         var result = await _mediator.Send(new BuscarProfessorCommand(id));
 
-        if (result.Professor == null) throw new NotFoundException("Professor não existe");
-
         return result.Professor;
     }
 
@@ -42,18 +39,12 @@ public class ProfessorController : ControllerBase
         return result.Professores;
     }
 
-    [HttpPut("{id}")]
+    [HttpPatch("{id}")]
     public async Task<ProfessorEntity> Put(int id, [FromBody] AlterarProfessorCommand alunoCommand)
     {
         var result = await _mediator.Send(alunoCommand);
 
         return result.Professor;
-    }
-
-    [HttpDelete("{id}")]
-    public async Task Delete(int id)
-    {
-        var result = await _mediator.Send(new ExcluirProfessorCommand(id));
     }
 }
 

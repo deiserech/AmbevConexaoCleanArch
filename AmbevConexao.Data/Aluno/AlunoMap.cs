@@ -18,6 +18,9 @@ namespace AmbevConexao.Infraestructure.Aluno
 
             builder.Property(x => x.Ativo)
                 .IsRequired();
+
+            builder.HasMany(aluno => aluno.Matriculas)
+                .WithOne(matricula => matricula.Aluno);
         }
     }
 }

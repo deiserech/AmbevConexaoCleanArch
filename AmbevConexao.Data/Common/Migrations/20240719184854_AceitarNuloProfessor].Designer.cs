@@ -3,6 +3,7 @@ using AmbevConexao.Infraestructure.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmbevConexao.Data.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20240719184854_AceitarNuloProfessor]")]
+    partial class AceitarNuloProfessor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,7 @@ namespace AmbevConexao.Data.Migrations
                     b.ToTable("Turma", (string)null);
                 });
 
-            modelBuilder.Entity("AmbevConexao.Domain.Model.TurmaAluno", b =>
+            modelBuilder.Entity("AmbevConexao.Domain.Model.Matricula", b =>
                 {
                     b.Property<int>("IdTurma")
                         .HasColumnType("int");
@@ -118,7 +121,7 @@ namespace AmbevConexao.Data.Migrations
 
                     b.HasIndex("IdAluno");
 
-                    b.ToTable("TurmaAluno", (string)null);
+                    b.ToTable("Matricula", (string)null);
                 });
 
             modelBuilder.Entity("AmbevConexao.Domain.Model.Turma", b =>
@@ -132,16 +135,16 @@ namespace AmbevConexao.Data.Migrations
                     b.Navigation("Professor");
                 });
 
-            modelBuilder.Entity("AmbevConexao.Domain.Model.TurmaAluno", b =>
+            modelBuilder.Entity("AmbevConexao.Domain.Model.Matricula", b =>
                 {
                     b.HasOne("AmbevConexao.Domain.Model.Aluno", "Aluno")
-                        .WithMany("TurmaAluno")
+                        .WithMany("Matricula")
                         .HasForeignKey("IdAluno")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AmbevConexao.Domain.Model.Turma", "Turma")
-                        .WithMany("TurmaAluno")
+                        .WithMany("Matricula")
                         .HasForeignKey("IdTurma")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -153,7 +156,7 @@ namespace AmbevConexao.Data.Migrations
 
             modelBuilder.Entity("AmbevConexao.Domain.Model.Aluno", b =>
                 {
-                    b.Navigation("TurmaAluno");
+                    b.Navigation("Matricula");
                 });
 
             modelBuilder.Entity("AmbevConexao.Domain.Model.Professor", b =>
@@ -163,7 +166,7 @@ namespace AmbevConexao.Data.Migrations
 
             modelBuilder.Entity("AmbevConexao.Domain.Model.Turma", b =>
                 {
-                    b.Navigation("TurmaAluno");
+                    b.Navigation("Matricula");
                 });
 #pragma warning restore 612, 618
         }
