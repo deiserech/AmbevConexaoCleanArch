@@ -9,8 +9,12 @@ namespace AmbevConexao.Infraestructure.Matricula
         {
             builder.ToTable("Matricula");
 
-            builder.HasKey(x => new { x.CursoId, x.AlunoId });
-            
+            builder.Property(x => x.Id)
+                .UseIdentityColumn();
+
+            builder.HasIndex(x => new { x.CursoId, x.AlunoId })
+                .IsUnique();
+
             builder.HasOne(x => x.Curso)
                 .WithMany(x => x.Matriculas)
                 .HasForeignKey(x => x.CursoId);

@@ -1,5 +1,6 @@
 ﻿using AmbevConexao.Domain.Common;
 using AmbevConexao.Domain.Curso;
+using System.Text.Json.Serialization;
 
 namespace AmbevConexao.Domain.Professor
 {
@@ -8,6 +9,7 @@ namespace AmbevConexao.Domain.Professor
         public int Id { get; set; }
         public string? Nome { get; private set; }
         public string? Email { get; private set; }
+        [JsonIgnore]
         public List<CursoEntity> Cursos { get; set; } = new List<CursoEntity>();
 
         public static ProfessorEntity NovoProfessor(string nome, string email)

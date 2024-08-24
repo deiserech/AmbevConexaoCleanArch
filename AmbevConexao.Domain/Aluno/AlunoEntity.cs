@@ -1,5 +1,6 @@
 ﻿using AmbevConexao.Domain.Common;
 using AmbevConexao.Domain.Matricula;
+using System.Text.Json.Serialization;
 
 namespace AmbevConexao.Domain.Aluno
 {
@@ -10,6 +11,7 @@ namespace AmbevConexao.Domain.Aluno
         public string? Endereco { get; private set; }
         public string? Email { get; private set; }
         public bool Ativo { get; private set; }
+        [JsonIgnore]
         public List<MatriculaEntity> Matriculas { get; private set; }
 
         public static AlunoEntity NovoAluno(string nome, string endereco, string email)

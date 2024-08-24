@@ -15,7 +15,9 @@ namespace AmbevConexao.Domain.Curso
         public DateTime? DataFim { get; private set; }
         public bool Ativo { get; private set; }
         public int? ProfessorId { get; private set; }
+        [JsonIgnore]
         public ProfessorEntity? Professor { get; private set; }
+        [JsonIgnore]
         public List<MatriculaEntity>? Matriculas { get; private set; }
         [JsonIgnore]
         public bool PossuiVaga => Vagas > 0;

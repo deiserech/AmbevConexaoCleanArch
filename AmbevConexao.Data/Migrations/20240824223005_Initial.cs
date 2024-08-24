@@ -69,17 +69,17 @@ namespace AmbevConexao.Infraestructure.Migrations
                 name: "Matricula",
                 columns: table => new
                 {
-                    AlunoId = table.Column<int>(type: "int", nullable: false),
-                    CursoId = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataMatricula = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    DescricaoStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DescricaoStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AlunoId = table.Column<int>(type: "int", nullable: false),
+                    CursoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Matricula", x => new { x.CursoId, x.AlunoId });
+                    table.PrimaryKey("PK_Matricula", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Matricula_Aluno_AlunoId",
                         column: x => x.AlunoId,
@@ -103,6 +103,12 @@ namespace AmbevConexao.Infraestructure.Migrations
                 name: "IX_Matricula_AlunoId",
                 table: "Matricula",
                 column: "AlunoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Matricula_CursoId_AlunoId",
+                table: "Matricula",
+                columns: new[] { "CursoId", "AlunoId" },
+                unique: true);
         }
 
         /// <inheritdoc />

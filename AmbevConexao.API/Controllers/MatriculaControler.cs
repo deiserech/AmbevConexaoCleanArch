@@ -33,11 +33,11 @@ namespace AmbevConexao.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IEnumerable<MatriculaEntity>> Post([FromBody] MatricularAlunoCommand matriculaCommand)
+        public async Task<string> Post([FromBody] MatricularAlunoCommand matriculaCommand)
         {
             var result = await _mediator.Send(matriculaCommand);
 
-            return result.Matriculas;
+            return result.StatusMatricula;
         }
     }
 }

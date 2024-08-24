@@ -2,6 +2,8 @@
 using AmbevConexao.Domain.Common;
 using AmbevConexao.Domain.Common.Enums;
 using AmbevConexao.Domain.Curso;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace AmbevConexao.Domain.Matricula
 {
@@ -10,11 +12,16 @@ namespace AmbevConexao.Domain.Matricula
         public int Id { get; set; }
         public DateTime DataMatricula { get; set; }
         public StatusMatricula Status { get; set; }
-        public string DescricaoStatus { get; set; }
         public int AlunoId { get; set; }
+        [JsonIgnore]
         public AlunoEntity Aluno { get; set; }
         public int CursoId { get; set; }
+        [JsonIgnore]
         public CursoEntity Curso { get; set; }
+
+        [NotMapped]
+        [JsonIgnore]
+        public string? DescricaoStatus { get; set; }
 
         public static MatriculaEntity? MatricularAluno(CursoEntity curso, AlunoEntity aluno)
         {
@@ -26,7 +33,7 @@ namespace AmbevConexao.Domain.Matricula
                 AlunoId = aluno.Id,
                 CursoId = curso.Id,
                 DataMatricula = DateTime.UtcNow,
-                Status = permitido ? StatusMatricula.Ativo : StatusMatricula.Cancelada,
+                Status = permitido ? StatusMatricula.Ativo : StatusMatricula.Recusada,
                 DescricaoStatus = descricaoStatus,
             };
 

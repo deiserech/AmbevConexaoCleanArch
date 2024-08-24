@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmbevConexao.Infraestructure.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20240824191359_Initial")]
-    partial class Initial
+    [Migration("20240824230202_AddNonMappedField")]
+    partial class AddNonMappedField
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,30 +91,30 @@ namespace AmbevConexao.Infraestructure.Migrations
 
             modelBuilder.Entity("AmbevConexao.Domain.Matricula.MatriculaEntity", b =>
                 {
-                    b.Property<int>("CursoId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataMatricula")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DescricaoStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("CursoId", "AlunoId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AlunoId");
+
+                    b.HasIndex("CursoId", "AlunoId")
+                        .IsUnique();
 
                     b.ToTable("Matricula", (string)null);
                 });

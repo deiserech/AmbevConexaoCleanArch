@@ -1,4 +1,5 @@
 ﻿using AmbevConexao.Domain.Aluno;
+using AmbevConexao.Domain.Common.Enums;
 using AmbevConexao.Domain.Curso;
 using AmbevConexao.Domain.Matricula;
 using MediatR;
@@ -19,7 +20,7 @@ public class MatricularAlunoCommand : IRequest<MatricularAlunoResponse>
 
 public class MatricularAlunoResponse
 {
-    public List<MatriculaEntity> Matriculas { get; set; }
+    public string StatusMatricula { get; set; }
 }
 
 public sealed class MatricularAluno : IRequestHandler<MatricularAlunoCommand, MatricularAlunoResponse>
@@ -46,13 +47,16 @@ public sealed class MatricularAluno : IRequestHandler<MatricularAlunoCommand, Ma
         }
 
         var matricula = MatriculaEntity.MatricularAluno(curso, aluno);
-        _matriculaRepository.Incluir(matricula);
+        if (matricula.Status == StatusMatricula.Ativo)
+        {
+            _matriculaRepository.Incluir(matricula);
+        }
 
         var matriculas = _matriculaRepository.SelecionarTudo();
 
         return new MatricularAlunoResponse
         {
-            Matriculas = matriculas
+            StatusMatricula = matricula.DescricaoStatus
         };
     }
 }

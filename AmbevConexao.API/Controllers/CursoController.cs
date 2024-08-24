@@ -41,8 +41,9 @@ namespace AmbevConexao.API.Controllers
         }
 
         [HttpPatch("/iniciar/{id}")]
-        public async Task<CursoEntity> Put(int id, [FromBody] IniciarCursoCommand cursoCommand)
+        public async Task<CursoEntity> Patch(int id, [FromBody] IniciarCursoCommand cursoCommand)
         {
+            cursoCommand.Id = id;
             var result = await _mediator.Send(cursoCommand);
 
             return result.Curso;

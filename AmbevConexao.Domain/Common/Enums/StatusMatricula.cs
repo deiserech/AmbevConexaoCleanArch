@@ -4,6 +4,7 @@
     {
         Ativo, 
         Inativo,
-        Cancelada
+        Cancelada,
+        Recusada
     }
 }
