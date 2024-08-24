@@ -1,10 +1,13 @@
-﻿using AmbevConexao.Domain.Curso;
+﻿using AmbevConecxao.Application.UseCases.Aluno;
+using AmbevConexao.Domain.Curso;
 using MediatR;
+using System.Text.Json.Serialization;
 
 namespace AmbevConecxao.Application.UseCases.Curso;
 
 public class IniciarCursoCommand : IRequest<IniciarCursoResponse>
 {
+    [JsonIgnore]
     public int Id { get; set; }
     public int IdProfessor { get; set; }
     public DateTime DataInicio { get; set; }
@@ -33,15 +36,19 @@ public sealed class IniciarCurso : IRequestHandler<IniciarCursoCommand, IniciarC
 
     public async Task<IniciarCursoResponse> Handle(IniciarCursoCommand request, CancellationToken cancellationToken)
     {
-        var cursoEntidade = _repository.Selecionar(request.Id);
+        var curso = _repository.Selecionar(request.Id);
+        if (curso is null)
+        {
+            return new IniciarCursoResponse();
+        }
 
-        cursoEntidade.AtivarCurso(request.DataInicio, request.IdProfessor);
+        curso.AtivarCurso(request.DataInicio, request.IdProfessor);
 
-        _repository.Alterar(cursoEntidade);
+        _repository.Alterar(curso);
 
         return new IniciarCursoResponse
         {
-            Curso = cursoEntidade
+            Curso = curso
         };
     }
 }

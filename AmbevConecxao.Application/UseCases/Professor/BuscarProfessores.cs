@@ -38,11 +38,11 @@ public sealed class BuscarProfessor : IRequestHandler<BuscarProfessorCommand, Bu
 
     public async Task<BuscarProfessorResponse> Handle(BuscarProfessorCommand request, CancellationToken cancellationToken)
     {
-        var aluno = _repository.Selecionar(request.Id);
+        var professor = _repository.Selecionar(request.Id);
 
         return new BuscarProfessorResponse
         {
-            Professor = aluno
+            Professor = professor
         };
     }
 }
@@ -58,11 +58,11 @@ public sealed class BuscarProfessores : IRequestHandler<BuscarProfessoresCommand
 
     public async Task<BuscarProfessoresResponse> Handle(BuscarProfessoresCommand request, CancellationToken cancellationToken)
     {
-        var alunos = _repository.SelecionarTudo();
+        var professores = _repository.SelecionarTudo();
 
         return new BuscarProfessoresResponse
         {
-            Professores = alunos.ToList()
+            Professores = professores.ToList()
         };
 
     }

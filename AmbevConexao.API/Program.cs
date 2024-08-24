@@ -1,3 +1,4 @@
+using AmbevConexao.Application.UseCases;
 using AmbevConexao.Domain.Aluno;
 using AmbevConexao.Domain.Common;
 using AmbevConexao.Domain.Curso;
@@ -11,6 +12,10 @@ using AmbevConexao.Infraestructure.Professor;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyReference).Assembly));
+
+builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

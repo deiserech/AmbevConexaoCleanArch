@@ -1,6 +1,7 @@
-﻿using AmbevConexao.Domain.Professor;
+﻿using AmbevConexao.Domain.Common;
 using AmbevConexao.Domain.Matricula;
-using AmbevConexao.Domain.Common;
+using AmbevConexao.Domain.Professor;
+using System.Text.Json.Serialization;
 
 namespace AmbevConexao.Domain.Curso
 {
@@ -13,15 +14,15 @@ namespace AmbevConexao.Domain.Curso
         public DateTime? DataInicio { get; private set; }
         public DateTime? DataFim { get; private set; }
         public bool Ativo { get; private set; }
-        public int? IdProfessor { get; private set; }
+        public int? ProfessorId { get; private set; }
         public ProfessorEntity? Professor { get; private set; }
         public List<MatriculaEntity>? Matriculas { get; private set; }
-
+        [JsonIgnore]
         public bool PossuiVaga => Vagas > 0;
-
+        [JsonIgnore]
         public bool CursoEmAndamento => DataInicio != null && DataInicio >= DateTime.UtcNow;
-
-        public bool PermitidoMatricular => PossuiVaga && !CursoEmAndamento;
+        [JsonIgnore]
+        public bool PermitidoMatricular => PossuiVaga && !CursoEmAndamento && DataInicio != null;
 
         public static CursoEntity NovoCurso(string titulo, string descricao)
         {
@@ -38,7 +39,7 @@ namespace AmbevConexao.Domain.Curso
 
         public CursoEntity AtivarCurso(DateTime dataInicio, int idProfessor)
         {
-            IdProfessor = idProfessor;
+            ProfessorId = idProfessor;
             DataInicio = dataInicio;
             Ativo = true;
             return this;

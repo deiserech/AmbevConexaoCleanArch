@@ -31,9 +31,9 @@ public sealed class AdicionarCurso : IRequestHandler<AdicionarCursoCommand, Adic
 
     public async Task<AdicionarCursoResponse> Handle(AdicionarCursoCommand request, CancellationToken cancellationToken)
     {
-        var cursoEntidade = CursoEntity.NovoCurso(request.Titulo, request.Descricao);
+        var curso = CursoEntity.NovoCurso(request.Titulo, request.Descricao);
 
-        _repository.Incluir(cursoEntidade);
+        _repository.Incluir(curso);
 
         var result = _repository.SelecionarTudo();
 

@@ -1,4 +1,5 @@
-﻿using AmbevConexao.Domain.Aluno;
+﻿using AmbevConecxao.Application.UseCases.Curso;
+using AmbevConexao.Domain.Aluno;
 using MediatR;
 
 namespace AmbevConecxao.Application.UseCases.Aluno;
@@ -30,6 +31,11 @@ public sealed class InativarAluno : IRequestHandler<InativarAlunoCommand, Inativ
     public async Task<InativarAlunoResponse> Handle(InativarAlunoCommand request, CancellationToken cancellationToken)
     {
         var aluno = _repository.Selecionar(request.Id);
+        if (aluno is null)
+        {
+            return new InativarAlunoResponse();
+        }
+
         aluno.Inativar();
         _repository.Alterar(aluno);
 

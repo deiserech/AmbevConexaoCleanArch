@@ -7,13 +7,13 @@ namespace AmbevConecxao.Application.UseCases.Matricula;
 
 public class MatricularAlunoCommand : IRequest<MatricularAlunoResponse>
 {
-    public int IdAluno { get; set; }
-    public int IdCurso { get; set; }
+    public string IdAluno { get; set; }
+    public string IdCurso { get; set; }
 
-    public MatricularAlunoCommand(int idAluno, int idMatricula)
+    public MatricularAlunoCommand(string idAluno, string idCurso)
     {
         IdAluno = idAluno;
-        IdCurso = idMatricula;
+        IdCurso = idCurso;
     }
 }
 
@@ -37,14 +37,12 @@ public sealed class MatricularAluno : IRequestHandler<MatricularAlunoCommand, Ma
 
     public async Task<MatricularAlunoResponse> Handle(MatricularAlunoCommand request, CancellationToken cancellationToken)
     {
-        var response = new MatricularAlunoResponse();
-
-        var aluno = _alunoRepository.Selecionar(request.IdAluno);
-        var curso = _cursoRepository.Selecionar(request.IdCurso);
+        var aluno = _alunoRepository.Selecionar(int.Parse(request.IdAluno));
+        var curso = _cursoRepository.Selecionar(int.Parse(request.IdCurso));
 
         if (curso is null || aluno is null)
         {
-            return response;
+            return new MatricularAlunoResponse();
         }
 
         var matricula = MatriculaEntity.MatricularAluno(curso, aluno);
@@ -52,7 +50,9 @@ public sealed class MatricularAluno : IRequestHandler<MatricularAlunoCommand, Ma
 
         var matriculas = _matriculaRepository.SelecionarTudo();
 
-        response.Matriculas = matriculas;
-        return response;
+        return new MatricularAlunoResponse
+        {
+            Matriculas = matriculas
+        };
     }
 }

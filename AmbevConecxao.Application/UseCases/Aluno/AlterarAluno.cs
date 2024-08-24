@@ -1,14 +1,17 @@
-﻿using AmbevConexao.Domain.Aluno;
+﻿using AmbevConecxao.Application.UseCases.Curso;
+using AmbevConexao.Domain.Aluno;
 using MediatR;
+using System.Text.Json.Serialization;
 
 namespace AmbevConecxao.Application.UseCases.Aluno;
 
 public class AlterarAlunoCommand : IRequest<AlterarAlunoResponse>
 {
+    [JsonIgnore]
     public int Id { get; set; }
-    public string Nome { get; set; }
-    public string Endereco { get; set; }
-    public string Email{ get; set; }
+    public string? Nome { get; set; }
+    public string? Endereco { get; set; }
+    public string? Email{ get; set; }
 
     public AlterarAlunoCommand(int id, string nome, string endereco, string email)
     {
@@ -35,17 +38,20 @@ public sealed class AlterarAluno : IRequestHandler<AlterarAlunoCommand, AlterarA
 
     public async Task<AlterarAlunoResponse> Handle(AlterarAlunoCommand request, CancellationToken cancellationToken)
     {
-        var alunoEntidade = _repository.Selecionar(request.Id);
+        var aluno = _repository.Selecionar(request.Id);
+        if (aluno is null)
+            return new AlterarAlunoResponse();
 
-        alunoEntidade.AlterarNome(request.Nome);
-        alunoEntidade.AlterarEndereco(request.Nome);
-        alunoEntidade.AlterarEmail(request.Nome);
 
-        _repository.Alterar(alunoEntidade);
+        aluno.AlterarNome(request.Nome);
+        aluno.AlterarEndereco(request.Endereco);
+        aluno.AlterarEmail(request.Email);
+
+        _repository.Alterar(aluno);
 
         return new AlterarAlunoResponse
         {
-            Aluno = alunoEntidade
+            Aluno = aluno
         };
     }
 }

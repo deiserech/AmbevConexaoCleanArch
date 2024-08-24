@@ -42,6 +42,7 @@ namespace AmbevConexao.API.Controllers
         [HttpPatch("{id}")]
         public async Task<AlunoEntity> Put(int id, [FromBody] AlterarAlunoCommand alunoCommand)
         {
+            alunoCommand.Id = id;
             var result = await _mediator.Send(alunoCommand);
 
             return result.Aluno;

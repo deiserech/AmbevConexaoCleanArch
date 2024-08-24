@@ -9,18 +9,15 @@ namespace AmbevConexao.Infraestructure.Matricula
         {
             builder.ToTable("Matricula");
 
-            builder.Property(x => x.Id)
-                .UseIdentityColumn();
-
-            builder.HasKey(x => new { x.IdCurso, x.IdAluno });
-
+            builder.HasKey(x => new { x.CursoId, x.AlunoId });
+            
             builder.HasOne(x => x.Curso)
                 .WithMany(x => x.Matriculas)
-                .HasForeignKey(x => x.IdCurso);
+                .HasForeignKey(x => x.CursoId);
 
             builder.HasOne(x => x.Aluno)
                 .WithMany(x => x.Matriculas)
-                .HasForeignKey(x => x.IdAluno);
+                .HasForeignKey(x => x.AlunoId);
         }
     }
 }

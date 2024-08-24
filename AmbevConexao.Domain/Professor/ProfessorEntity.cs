@@ -23,13 +23,19 @@ namespace AmbevConexao.Domain.Professor
 
         public ProfessorEntity AlterarNome(string novoNome)
         {
-            Nome = novoNome;
+            if (novoNome is not null)
+            {
+                Nome = novoNome;
+            }
             return this;
         }
 
         public ProfessorEntity AlterarEmail(string novoEmail)
         {
-            Email = novoEmail;
+            if (novoEmail is not null)
+            {
+                Email = novoEmail;
+            }
             return this;
         }
     }

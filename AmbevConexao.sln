@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmbevConexao.API", "AmbevCo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{2886A283-E668-4C97-B566-2FFA58061328}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbevConecxao.Application", "AmbevConecxao.Application\AmbevConecxao.Application.csproj", "{E65ED9CF-7856-4B93-89E8-2038A00C6D33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmbevConexao.Application", "AmbevConecxao.Application\AmbevConexao.Application.csproj", "{E65ED9CF-7856-4B93-89E8-2038A00C6D33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

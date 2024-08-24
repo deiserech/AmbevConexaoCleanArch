@@ -11,9 +11,9 @@ namespace AmbevConexao.Domain.Matricula
         public DateTime DataMatricula { get; set; }
         public StatusMatricula Status { get; set; }
         public string DescricaoStatus { get; set; }
-        public int IdAluno { get; set; }
+        public int AlunoId { get; set; }
         public AlunoEntity Aluno { get; set; }
-        public int IdCurso { get; set; }
+        public int CursoId { get; set; }
         public CursoEntity Curso { get; set; }
 
         public static MatriculaEntity? MatricularAluno(CursoEntity curso, AlunoEntity aluno)
@@ -23,8 +23,8 @@ namespace AmbevConexao.Domain.Matricula
 
             var matricula = new MatriculaEntity
             {
-                IdAluno = aluno.Id,
-                IdCurso = curso.Id,
+                AlunoId = aluno.Id,
+                CursoId = curso.Id,
                 DataMatricula = DateTime.UtcNow,
                 Status = permitido ? StatusMatricula.Ativo : StatusMatricula.Cancelada,
                 DescricaoStatus = descricaoStatus,

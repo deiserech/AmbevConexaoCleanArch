@@ -32,17 +32,18 @@ public class ProfessorController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IEnumerable<ProfessorEntity>> Post([FromBody] AdicionarProfessorCommand alunoCommand)
+    public async Task<IEnumerable<ProfessorEntity>> Post([FromBody] AdicionarProfessorCommand professorCommand)
     {
-        var result = await _mediator.Send(alunoCommand);
+        var result = await _mediator.Send(professorCommand);
 
         return result.Professores;
     }
 
     [HttpPatch("{id}")]
-    public async Task<ProfessorEntity> Put(int id, [FromBody] AlterarProfessorCommand alunoCommand)
+    public async Task<ProfessorEntity> Put(int id, [FromBody] AlterarProfessorCommand professorCommand)
     {
-        var result = await _mediator.Send(alunoCommand);
+        professorCommand.Id = id;
+        var result = await _mediator.Send(professorCommand);
 
         return result.Professor;
     }

@@ -29,15 +29,19 @@ public sealed class InativarCurso : IRequestHandler<InativarCursoCommand, Inativ
 
     public async Task<InativarCursoResponse> Handle(InativarCursoCommand request, CancellationToken cancellationToken)
     {
-        var cursoEntidade = _repository.Selecionar(request.Id);
+        var curso = _repository.Selecionar(request.Id);
+        if (curso is null)
+        {
+            return new InativarCursoResponse();
+        }
 
-        cursoEntidade.DesativarCurso();
+        curso.DesativarCurso();
 
-        _repository.Alterar(cursoEntidade);
+        _repository.Alterar(curso);
 
         return new InativarCursoResponse
         {
-            Curso = cursoEntidade
+            Curso = curso
         };
     }
 }

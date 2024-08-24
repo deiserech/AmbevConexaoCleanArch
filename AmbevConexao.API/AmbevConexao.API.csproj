@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AmbevConecxao.Application\AmbevConecxao.Application.csproj" />
+    <ProjectReference Include="..\AmbevConecxao.Application\AmbevConexao.Application.csproj" />
     <ProjectReference Include="..\AmbevConexao.Data\AmbevConexao.Infraestructure.csproj" />
     <ProjectReference Include="..\AmbevConexao.Domain\AmbevConexao.Domain.csproj" />
   </ItemGroup>

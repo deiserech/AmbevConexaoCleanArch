@@ -33,9 +33,9 @@ public sealed class AdicionarProfessor : IRequestHandler<AdicionarProfessorComma
 
     public async Task<AdicionarProfessorResponse> Handle(AdicionarProfessorCommand request, CancellationToken cancellationToken)
     {
-        var alunoEntidade = ProfessorEntity.NovoProfessor(request.Nome, request.Email);
+        var professor = ProfessorEntity.NovoProfessor(request.Nome, request.Email);
 
-        _repository.Incluir(alunoEntidade);
+        _repository.Incluir(professor);
 
         var result = _repository.SelecionarTudo();
 

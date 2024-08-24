@@ -34,9 +34,9 @@ public sealed class AdicionarAluno : IRequestHandler<AdicionarAlunoCommand, Adic
 
     public async Task<AdicionarAlunoResponse> Handle(AdicionarAlunoCommand request, CancellationToken cancellationToken)
     {
-        var alunoEntidade = AlunoEntity.NovoAluno(request.Nome, request.Endereco, request.Email);
+        var aluno = AlunoEntity.NovoAluno(request.Nome, request.Endereco, request.Email);
 
-        _repository.Incluir(alunoEntidade);
+        _repository.Incluir(aluno);
 
         var result =  _repository.SelecionarTudo();
 
