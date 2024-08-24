@@ -1,4 +1,5 @@
 ﻿using AmbevConexao.Domain.Aluno;
+using AmbevConexao.Domain.Curso;
 using AmbevConexao.Domain.Matricula;
 using AmbevConexao.Domain.Professor;
 using AmbevConexao.Infraestructure.Aluno;

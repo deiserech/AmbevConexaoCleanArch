@@ -1,5 +1,4 @@
 ﻿using AmbevConexao.Domain.Curso;
-using AmbevConexao.Domain.Turma;
 using AmbevConexao.Infraestructure.Common;
 
 namespace AmbevConexao.Infraestructure.Curso;

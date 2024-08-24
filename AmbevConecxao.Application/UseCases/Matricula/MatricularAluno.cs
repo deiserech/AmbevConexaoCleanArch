@@ -52,8 +52,7 @@ public sealed class MatricularAluno : IRequestHandler<MatricularAlunoCommand, Ma
 
         var matriculas = _matriculaRepository.SelecionarTudo();
 
-
-        response.Matricula = matriculas;
+        response.Matriculas = matriculas;
         return response;
     }
 }

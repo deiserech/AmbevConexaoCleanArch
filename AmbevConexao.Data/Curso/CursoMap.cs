@@ -1,4 +1,4 @@
-﻿using AmbevConexao.Domain.Turma;
+﻿using AmbevConexao.Domain.Curso;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
